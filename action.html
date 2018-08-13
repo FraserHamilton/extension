@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Action Sample</title>
+    <script src="sdk/scripts/VSS.SDK.js"></script>
+    <script>
+        VSS.init();
+
+        // Use an IIFE to create an object that satisfies the IContributedMenuSource contract
+        var menuContributionHandler = (function () {
+            "use strict";
+            return {
+                // This is a callback that gets invoked when a user clicks the newly contributed menu item
+                // The actionContext parameter contains context data surrounding the circumstances of this
+                // action getting invoked.
+                execute: function (actionContext) {
+                    alert("Hello, world");
+                }
+            };
+        }());
+
+        // Associate the menuContributionHandler object with the "myAction" menu contribution from the manifest.
+        VSS.register("myAction", menuContributionHandler);
+    </script>
+</head>
+
+<body>
+    <div>
+        The end user doesn't see the content on this page. It is only in the background to handle the contributed menu item being
+        clicked.
+    </div>
+</body>
+
+</html>
