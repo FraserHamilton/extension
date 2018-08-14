@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "pr-link-extension",
   "publisher": "ExtensionTest",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "PR Link Extension",
   "description": "A sample Visual Studio Services extension",
   "public": false,
@@ -17,7 +17,7 @@
       "id": "myAction",
       "type": "ms.vss-web.action",
       "description": "Run in Hello hub action",
-      "targets": ["ms.vss-work-web.work-item-query-menu"],
+      "targets": ["ms.vss-code-web.pull-request-action-menu"],
       "properties": {
         "text": "Run in Hello hub",
         "title": "Run in Hello hub",
@@ -27,6 +27,7 @@
       }
     }
   ],
+  "scopes": ["vso.work"],
   "files": [
     {
       "path": "action.html",
