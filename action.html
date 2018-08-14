@@ -9,20 +9,53 @@
         VSS.init();
 
         // Use an IIFE to create an object that satisfies the IContributedMenuSource contract
-        var menuContributionHandler = (function () {
+        var menuOpenPrHandler = (function () {
             "use strict";
             return {
                 // This is a callback that gets invoked when a user clicks the newly contributed menu item
                 // The actionContext parameter contains context data surrounding the circumstances of this
                 // action getting invoked.
                 execute: function (actionContext) {
-                    alert("Hello, world");
+                    VSS.getService(VSS.ServiceIds.ExtensionData).then(function (dataService) {
+                        // Get value in user scope
+                        dataService.getValue("sysname", { scopeType: "User" })
+                            .then(function (value) {
+                                if (value == undefined) {
+                                    let sysname = prompt("Enter your sysname")
+                                    dataService.setValue("sysname", sysname, { scopeType: "User" }).then(function (value) {
+                                        window.open("https://" + value + ".parentseveningsystem.co.uk/v2pr" + actionContext.pullRequest.pullRequestId + "/", '_blank');
+                                    });
+                                } else {
+                                    window.open("https://" + value + ".parentseveningsystem.co.uk/v2pr" + actionContext.pullRequest.pullRequestId + "/", '_blank');
+                                }
+                            })
+                    });
+                }
+            };
+        }());
+
+        var menuUpdateSysnameHandler = (function () {
+            "use strict";
+            return {
+                // This is a callback that gets invoked when a user clicks the newly contributed menu item
+                // The actionContext parameter contains context data surrounding the circumstances of this
+                // action getting invoked.
+                execute: function (actionContext) {
+                    VSS.getService(VSS.ServiceIds.ExtensionData).then(function (dataService) {
+                        // Get value in user scope
+                        let sysname = prompt("Enter your new sysname")
+                        dataService.setValue("sysname", sysname, { scopeType: "User" }).then(function (value) {
+                            window.open("https://" + value + ".parentseveningsystem.co.uk/v2pr" + actionContext.pullRequest.pullRequestId + "/", '_blank');
+                        });
+                    });
                 }
             };
         }());
 
         // Associate the menuContributionHandler object with the "myAction" menu contribution from the manifest.
-        VSS.register("myAction", menuContributionHandler);
+        VSS.register("OpenAction", menuOpenPrHandler);
+        VSS.register("UpdateAction", menuUpdateSysnameHandler);
+
     </script>
 </head>
 

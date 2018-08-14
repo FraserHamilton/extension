@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "pr-link-extension",
   "publisher": "ExtensionTest",
-  "version": "1.0.2",
+  "version": "1.1.2",
   "name": "PR Link Extension",
   "description": "A sample Visual Studio Services extension",
   "public": false,
@@ -14,14 +14,27 @@
   ],
   "contributions": [
     {
-      "id": "myAction",
+      "id": "OpenAction",
       "type": "ms.vss-web.action",
-      "description": "Run in Hello hub action",
+      "description": "Open PR Branch In Browser",
       "targets": ["ms.vss-code-web.pull-request-action-menu"],
       "properties": {
-        "text": "Run in Hello hub",
-        "title": "Run in Hello hub",
-        "icon": "images/icon.png",
+        "text": "Open PR Branch In Browser",
+        "title": "Open PR Branch In Browser",
+        "icon": null,
+        "groupId": "actions",
+        "uri": "action.html"
+      }
+    },
+    {
+      "id": "UpdateAction",
+      "type": "ms.vss-web.action",
+      "description": "Update Saved Sysname",
+      "targets": ["ms.vss-code-web.pull-request-action-menu"],
+      "properties": {
+        "text": "Update Saved Sysname",
+        "title": "Update Saved Sysname",
+        "icon": null,
         "groupId": "actions",
         "uri": "action.html"
       }
